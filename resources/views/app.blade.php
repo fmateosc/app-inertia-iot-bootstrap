@@ -12,9 +12,13 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> -->
 
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/transparent-style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
 
     <!-- Scripts -->
     @routes
