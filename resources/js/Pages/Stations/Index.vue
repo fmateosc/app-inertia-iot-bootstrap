@@ -70,7 +70,7 @@
                         <!-- PAGINACIÓN -->
                         <Paginator 
                             :pagination="stations"
-                            :dataPagination=false
+                            :dataPagination="false"
                         >
                         </Paginator>
                     </div>
@@ -90,6 +90,8 @@ import TableC from "@/Components/Table/TableColumn.vue";
 
 import Paginator from "@/Components/Paginator/Paginator";
 
+import pickBy from "lodash/pickBy";
+
 export default defineComponent({
     props: {
         stations: Object,
@@ -105,6 +107,16 @@ export default defineComponent({
         return {
             search: "",
         };
+    },
+    watch: {
+        search($value) {
+            this.$inertia.get("estaciones", pickBy({ search: $value }), {
+                preserveState: true,
+            });
+        },
+    },
+    mounted() {
+        this.serch = "";
     },
 });
 </script>
