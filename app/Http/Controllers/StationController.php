@@ -14,10 +14,22 @@ class StationController extends Controller
     {
         $filters = $request->all('search');
 
+        $sortBy = $request->sortBy;
 
-        $stations = Station::filter($filters)
+        if (!in_array($sortBy, ['id', 'device_id', 'name', 'type'])) {
+            $sortBy = 'id';
+        }
+
+        $sort = $request->sort;
+
+        if (!in_array($sort, ['ASC', 'DESC'])) {
+            $sort = 'ASC';
+        }
+
+        $stations = Station::orderBy($sortBy, ($sort == 'ASC') ? 'ASC' : 'DESC')
+            ->filter($filters)
             ->paginate(20);
 
-        return Inertia::render('Stations/Index', compact('stations'));  
+        return Inertia::render('Stations/Index', compact('stations', 'sortBy', 'sort'));  
     }     
 }

@@ -32,15 +32,58 @@
                             </div>
                         </div>
 
-                        <!-- TABLA -->  
+                        <!-- TABLA -->
                         <div class="table-responsive mt-5">
                             <Table>
                                 <template #header>
-                                    <TableC>ID ESTACIÓN</TableC>
-                                    <TableC>NOMBRE ESTACIÓN</TableC>
-                                    <TableC>PAÍS</TableC>
-                                    <TableC>LATITUD</TableC>
-                                    <TableC>LONGITUD</TableC>
+                                    <TableC
+                                        @click="sortColumn('id_station')"
+                                        :sortHeader="false"
+                                        field="id_station"
+                                        :sortBy="sortBy"
+                                        :sort="sort"
+                                    >
+                                        ID ESTACIÓN
+                                    </TableC>
+
+                                    <TableC
+                                        @click="sortColumn('name')"
+                                        :sortHeader="true"
+                                        field="name"
+                                        :sortBy="sortBy"
+                                        :sort="sort"
+                                    >
+                                        NOMBRE ESTACIÓN
+                                    </TableC>
+
+                                    <TableC
+                                        @click="sortColumn('country_name')"
+                                        :sortHeader="false"
+                                        field="country_name"
+                                        :sortBy="sortBy"
+                                        :sort="sort"
+                                    >
+                                        PAÍS
+                                    </TableC>
+
+                                    <TableC
+                                        @click="sortColumn('lat')"
+                                        :sortHeader="false"
+                                        field="lat"
+                                        :sortBy="sortBy"
+                                        :sort="sort"
+                                    >
+                                        LATITUD
+                                    </TableC>
+                                    <TableC
+                                        @click="sortColumn('lon')"
+                                        :sortHeader="false"
+                                        field="lon"
+                                        :sortBy="sortBy"
+                                        :sort="sort"
+                                    >
+                                        LONGITUD
+                                    </TableC>
                                     <TableC>ACCIONES</TableC>
                                 </template>
 
@@ -60,15 +103,13 @@
                                     <!---------LONGITUD---------------------------->
                                     <TableC>{{ station.lon }}</TableC>
                                     <!---------BOTONES DE ACCIONES---------------------------->
-                                    <td class="p-2 whitespace-nowrap">
-                                        
-                                    </td>
+                                    <td class="p-2 whitespace-nowrap"></td>
                                 </tr>
-                            </Table>                            
+                            </Table>
                         </div>
 
                         <!-- PAGINACIÓN -->
-                        <Paginator 
+                        <Paginator
                             :pagination="stations"
                             :dataPagination="false"
                         >
@@ -95,6 +136,8 @@ import pickBy from "lodash/pickBy";
 export default defineComponent({
     props: {
         stations: Object,
+        sortBy: String,
+        sort: String
     },
     components: {
         AppLayout,
@@ -115,9 +158,25 @@ export default defineComponent({
             });
         },
     },
+    methods: {
+        sortColumn(col){
+            let sort = this.sort;
+
+            if (this.sort == "ASC") {
+                sort = "DESC";
+            } else {
+               sort = "ASC"; 
+            }
+            
+            this.$inertia.get(route('estaciones.index'), {
+                'sortBy': col,
+                sort: sort,
+                page: this.stations.current_page,        
+            }, {preserveScroll: true});
+        }
+    },
     mounted() {
         this.serch = "";
     },
 });
 </script>
-
