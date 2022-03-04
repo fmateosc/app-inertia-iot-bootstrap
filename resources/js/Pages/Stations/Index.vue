@@ -68,7 +68,11 @@
                         </div>
 
                         <!-- PAGINACIÓN -->
-                        <Paginator :pagination="stations"></Paginator>
+                        <Paginator 
+                            :pagination="stations"
+                            :dataPagination=false
+                        >
+                        </Paginator>
                     </div>
                 </div>
             </div>
