@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\StationController;
+use App\Http\Controllers\DeviceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +37,20 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified'])
     ->get('/dashboard/estaciones', [StationController::class, 'index'])
     ->name('estaciones.index');
+
+//RUTAS PARA LOS DISPOSITIVOS
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('/dashboard/dispositivos', [DeviceController::class, 'index'])
+    ->name('dispositivos.index');
+
+Route::middleware(['auth:sanctum', 'verified'])
+->post('/dashboard/dispositivos/store', [DeviceController::class, 'store'])
+->name('dispositivos.store');
+
+Route::middleware(['auth:sanctum', 'verified'])
+    ->put('/dashboard/dispositivos/{id}/update', [DeviceController::class, 'update'])
+    ->name('dispositivos.update');
+
+Route::middleware(['auth:sanctum', 'verified'])
+    ->put('/dashboard/dispositivos/{device}/activarDesactivar', [DeviceController::class, 'activarDesactivar'])
+    ->name('dispositivos.activar-desactivar');    

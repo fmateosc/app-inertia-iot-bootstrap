@@ -30,6 +30,5 @@ class StationController extends Controller
             ->filter($filters)
             ->paginate(20);
 
-        return Inertia::render('Stations/Index', compact('stations', 'sortBy', 'sort'));  
-    }     
+        return Inertia::render('Stations/Index', compact('stations', 'sortBy', 'sort'));      }     
 }

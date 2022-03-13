@@ -24,6 +24,10 @@
             <jet-nav-link :href="route('estaciones.index')" :active="route().current('estaciones.*')">
                 Estaciones meteorológicas
             </jet-nav-link>
+
+            <jet-nav-link :href="route('dispositivos.index')" :active="route().current('dispositivos.*')">
+                Dispositivos
+            </jet-nav-link>
           </ul>
 
           <!-- Right Side Of Navbar -->

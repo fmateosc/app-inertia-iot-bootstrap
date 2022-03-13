@@ -1,5 +1,5 @@
 <template>
-  <table class="table border text-nowrap text-md-nowrap table-bordered mb-0 table-hover">
+  <table class="table table-bordered border text-nowrap mb-0">
     <thead>
       <tr>
         <slot name="header" />
