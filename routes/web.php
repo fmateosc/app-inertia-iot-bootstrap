@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\BrokerController;
 
 
 /*
@@ -53,4 +54,9 @@ Route::middleware(['auth:sanctum', 'verified'])
 
 Route::middleware(['auth:sanctum', 'verified'])
     ->put('/dashboard/dispositivos/{device}/activarDesactivar', [DeviceController::class, 'activarDesactivar'])
-    ->name('dispositivos.activar-desactivar');    
+    ->name('dispositivos.activar-desactivar');
+
+//RUTAS PARA INFORMACION DEL BROKER
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('/dashboard/broker', [BrokerController::class, 'index'])
+    ->name('broker.index');     
