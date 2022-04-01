@@ -6,6 +6,7 @@ use App\Models\Device;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Uuid;
 
 class DeviceController extends Controller
 {
@@ -35,14 +36,21 @@ class DeviceController extends Controller
 
     public function store(Request $request)
     {
-        Device::create(
-            $request->validate([
-                'device_id' => "required|min:4|max:10|unique:devices",
-                'name' => "required|min:4|max:20",
-                'type' => "required|min:5|max:100",
-                'notas' => ""
-            ])
-        );
+        $this->validate($request, [
+            'device_id' =>
+            "required|min:4|max:10|unique:devices",
+            'name' => "required|min:4|max:20",
+            'type' => "required|min:5|max:100",
+            'notas' => ""
+        ]);
+
+        $device = Device::create([
+            'device_id' => $request->device_id,
+            'name' => $request->name,
+            'type' => $request->type,
+            'notas' => $request->notas,
+            'password' => Uuid::generate()->string
+        ]);
 
         return Redirect::route('dispositivos.index');
     }

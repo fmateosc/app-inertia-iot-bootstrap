@@ -9,7 +9,7 @@ class Device extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['device_id', 'name', 'type', 'notas'];
+    protected $fillable = ['device_id', 'name', 'type', 'notas', 'password'];
 
     //Query Scope
     public function scopeFilter($query, $filters)

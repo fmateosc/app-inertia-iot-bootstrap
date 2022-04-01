@@ -64,7 +64,7 @@ export default defineComponent({
         async getBrokerInfo() {
             try {
                 const res = await axios.get(
-                    "https://iotspain.xyz/broker/get-broker-info"
+                    "http://iotspain.xyz:3000/api/get-broker-info"
                 );
 
                 if (res.data.status == "success") {

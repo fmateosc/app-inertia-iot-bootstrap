@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stations', function (Blueprint $table) {
+        Schema::create('rules', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_station')->unique();
-            $table->string('name', 44);
-            $table->string('country_code', 20);
-            $table->string('country_name', 50);
-            $table->string('lat', 20);
-            $table->string('lon', 20);
-            $table->bigInteger('user_id')->default(null);
+            $table->string('device_id', 50)
+            $table->string('emq_rule_id', 20)->unique();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stations');
+        Schema::dropIfExists('rules');
     }
 };

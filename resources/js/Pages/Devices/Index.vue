@@ -173,6 +173,8 @@
                                         NOMBRE
                                     </TableC>
 
+                                    <TableC :sortHeader="false">PASSWORD</TableC>
+
                                     <TableC
                                         @click="sortColumn('type')"
                                         :sortHeader="true"
@@ -182,6 +184,7 @@
                                     >
                                         Tipo
                                     </TableC>
+
                                     <TableC
                                         @click="sortColumn('created_ad')"
                                         :sortHeader="true"
@@ -190,7 +193,7 @@
                                         :sort="sort"
                                     >
                                         CREADO EL
-                                    </TableC>
+                                    </TableC>                                    
                                     <TableC>ACCIONES</TableC>
                                 </template>
 
@@ -205,6 +208,8 @@
                                     <TableC>{{ device.device_id }}</TableC>
                                     <!---------DEVICE NAME---------------------------->
                                     <TableC>{{ device.name }}</TableC>
+                                    <!---------DEVICE NAME---------------------------->
+                                    <TableC>{{ device.password }}</TableC>
                                     <!---------DEVICE TYPE---------------------------->
                                     <TableC>{{ device.type }}</TableC>
                                     <!---------CREADO EL---------------------------->
@@ -212,7 +217,6 @@
                                         formattedDate(device.created_at)
                                     }}</TableC>
                                     <!---------BOTONES DE ACCIONES---------------------------->
-                                    {{device.selected}}
                                     <td class="bstable-actions">
                                         <div class="d-flex flex-row">
                                             <div                                                
@@ -359,7 +363,9 @@ export default defineComponent({
         submit() {
             if (this.insertMode) {
                 this.form.post(route("dispositivos.store"));
-
+                
+                const dId = this.$inertia.get(route("dispositivos.last-id-insert"));
+                console.log(dId)                 
                 not1();
 
                 this.insertMode = true;

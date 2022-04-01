@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name', 20);
             $table->string('type', 100);
             $table->text('notas')->nullable();
-            $table->string('password', 20)->nullable();
+            $table->string('password', 60)->nullable();
             $table->boolean('selected')->default(false);
             $table->timestamps();
         });
