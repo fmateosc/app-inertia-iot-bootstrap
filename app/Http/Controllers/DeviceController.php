@@ -43,13 +43,17 @@ class DeviceController extends Controller
             'type' => "required|min:5|max:100",
             'notas' => ""
         ]);
+        
+        $password = Uuid::generate()->string;
+        $password = str_replace('-', '', $password);
+        $password =substr($password, 0, 9);
 
         $device = Device::create([
             'device_id' => $request->device_id,
             'name' => $request->name,
             'type' => $request->type,
             'notas' => $request->notas,
-            'password' => Uuid::generate()->string
+            'password' => $password
         ]);
 
         return Redirect::route('dispositivos.index');
